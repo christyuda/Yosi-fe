@@ -12,7 +12,6 @@ class AllSidangScreen extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.search),
             onPressed: () {
-              // Tampilkan dialog pencarian
               showSearch(context: context, delegate: SidangSearchDelegate());
             },
           ),
