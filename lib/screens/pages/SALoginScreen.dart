@@ -43,12 +43,13 @@ class LoginScreen extends StatelessWidget {
             ),
             SizedBox(height: 20),
             Obx(() => DropdownButtonFormField<String>(
-                  value: _loginController.role.value,
-                  onChanged: (value) => _loginController.setRole(value!),
+                  value: _loginController.role.value.toLowerCase(),
+                  onChanged: (value) =>
+                      _loginController.setRole(value!.toLowerCase()),
                   items: <String>['Mahasiswa', 'Dosen'].map((String value) {
                     return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value),
+                      value: value.toLowerCase(),
+                      child: Text(value.toLowerCase()),
                     );
                   }).toList(),
                   decoration: InputDecoration(

@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sidang_apps/model/SALogin.dart';
-import 'package:sidang_apps/screens/pages/SAMahasiswaScreen.dart';
+import 'package:sidang_apps/screens/pages/mahasiswa/SAMahasiswaScreen.dart';
 import 'package:sidang_apps/screens/pages/SADosenScreen.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
@@ -52,15 +52,13 @@ class LoginController extends GetxController {
   }
 
   void _navigateToScreen(String role) {
-    if (role == 'dosen') {
+    if (role.toLowerCase() == 'dosen') {
       Get.offAll(DosenScreen());
+    } else if (role.toLowerCase() == 'mahasiswa') {
+      Get.offAll(MahasiswaScreen());
     } else {
-      if (role == 'Mahasiswa') {
-        Get.offAll(MahasiswaScreen());
-      } else {
-        Get.snackbar('Error', 'Role tidak valid',
-            snackPosition: SnackPosition.TOP);
-      }
+      Get.snackbar('Error', 'Role tidak valid',
+          snackPosition: SnackPosition.TOP);
     }
   }
 

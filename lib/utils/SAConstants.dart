@@ -17,7 +17,16 @@ const kSubheadingextStyle = TextStyle(
   color: Color(0xFF61688B),
   height: 2,
 );
-
+const kSubheadingext2Style = TextStyle(
+  fontSize: 18,
+  color: Color(0xFF61688B),
+  height: 2,
+);
+const kStatusStyle = TextStyle(
+  fontSize: 14,
+  color: Color(0xFF61688B),
+  height: 2,
+);
 const kTitleTextStyle = TextStyle(
   fontSize: 20,
   color: kTextColor,
