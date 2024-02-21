@@ -7,7 +7,6 @@ import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:sidang_apps/controllers/SANavigationController.dart';
 import 'package:sidang_apps/controllers/SASidangController.dart';
 import 'package:sidang_apps/model/SABanner.dart';
-import 'package:sidang_apps/model/SASidangData.dart';
 import 'package:sidang_apps/model/SASidangDataModel.dart';
 import 'package:sidang_apps/utils/SAConstants.dart';
 import 'package:carousel_slider/carousel_slider.dart';

@@ -11,7 +11,7 @@ class SidangService {
       String? token = TokenController.instance.token.value;
 
       // Periksa apakah token tidak null dan tidak kosong
-      if (token != null && token.isNotEmpty) {
+      if (token.isNotEmpty) {
         // Tambahkan token ke dalam header permintaan
         Options options = Options(headers: {'login': token});
 
