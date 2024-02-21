@@ -1,9 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sidang_apps/controllers/SABottomController.dart';
+import 'package:sidang_apps/controllers/SATokenController.dart';
 import 'package:sidang_apps/model/SALogin.dart';
-import 'package:sidang_apps/screens/pages/mahasiswa/SAMahasiswaScreen.dart';
-import 'package:sidang_apps/screens/pages/SADosenScreen.dart';
+// import 'package:sidang_apps/screens/pages/mahasiswa/SAMahasiswaScreen.dart';
+// import 'package:sidang_apps/screens/pages/SADosenScreen.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class LoginController extends GetxController {
@@ -29,10 +31,14 @@ class LoginController extends GetxController {
       password: password.value,
       role: role.value,
     );
-
     try {
       final response = await _postLogin(request);
       final loginResponse = LoginResponse.fromJson(response);
+      if (loginResponse.token.isNotEmpty) {
+        await TokenController.instance.setToken(loginResponse.token);
+      } else {
+        throw Exception('Token not found in login response');
+      }
       await saveToken(loginResponse.token);
       _navigateToScreen(loginResponse.role);
     } on DioException catch (e) {
@@ -53,9 +59,9 @@ class LoginController extends GetxController {
 
   void _navigateToScreen(String role) {
     if (role.toLowerCase() == 'dosen') {
-      Get.offAll(DosenScreen());
+      Get.offAll(BottomNavController().getMainScreen());
     } else if (role.toLowerCase() == 'mahasiswa') {
-      Get.offAll(MahasiswaScreen());
+      Get.offAll(BottomNavController().getMainScreen());
     } else {
       Get.snackbar('Error', 'Role tidak valid',
           snackPosition: SnackPosition.TOP);

@@ -44,6 +44,9 @@ dependencies:
   dropdown_button2: ^2.3.9
   flutter_staggered_animations: ^1.1.1
   carousel_slider: ^4.2.1
+  persistent_bottom_nav_bar: ^5.0.2
+  flutter_neumorphic: ^3.2.0
+  network_logger: ^1.0.4
 
 dev_dependencies:
   flutter_test:

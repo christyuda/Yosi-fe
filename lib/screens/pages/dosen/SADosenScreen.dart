@@ -3,18 +3,13 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/get_instance.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:sidang_apps/controllers/SANavigationController.dart';
-import 'package:sidang_apps/controllers/SASidangController.dart';
 import 'package:sidang_apps/model/SABanner.dart';
-import 'package:sidang_apps/model/SASidangData.dart';
 import 'package:sidang_apps/model/SASidangDataModel.dart';
 import 'package:sidang_apps/utils/SAConstants.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
-class MahasiswaScreen extends StatelessWidget {
-  final SidangController sidangController = Get.put(SidangController());
-
+class DosenScrren extends StatelessWidget {
   final List<GridItem> gridItems = [
     GridItem(title: 'Approved', imagePath: 'assets/images/music.png'),
     GridItem(title: 'Completed', imagePath: 'assets/images/music.png'),
@@ -97,66 +92,55 @@ class MahasiswaScreen extends StatelessWidget {
             ),
             SizedBox(height: 30),
             Expanded(
-              child: Obx(() {
-                if (sidangController.isLoading.value) {
-                  return Center(child: CircularProgressIndicator());
-                } else {
-                  return StaggeredGridView.countBuilder(
-                    crossAxisCount: 2,
-                    itemCount: sidangController.sidangDataList.length,
-                    itemBuilder: (BuildContext context, int index) =>
-                        GestureDetector(
-                      onTap: () {
-                        final sidangData =
-                            sidangController.sidangDataList[index];
-                        Get.find<NavigationController>()
-                            .goToDetailScreen(sidangData);
-                        print('Item $index tapped');
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.grey[200],
-                          borderRadius: BorderRadius.circular(20.0),
-                          image: DecorationImage(
-                            opacity: 0.5,
-                            image: AssetImage(gridItems[index].imagePath),
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        child: Column(
-                          children: <Widget>[
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Container(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 20, vertical: 2),
-                                  decoration: BoxDecoration(
-                                    color: _getStatusColor(sidangController
-                                        .sidangDataList[index].status),
-                                    borderRadius: BorderRadius.only(
-                                      bottomLeft: Radius.circular(12),
-                                    ),
-                                  ),
-                                  child: Text(
-                                    sidangController
-                                        .sidangDataList[index].status,
-                                    style: kStatusStyle,
-                                  ),
+              child: StaggeredGridView.countBuilder(
+                crossAxisCount: 2,
+                itemCount: gridItems.length,
+                itemBuilder: (BuildContext context, int index) =>
+                    GestureDetector(
+                  onTap: () {
+                    // Handle item tap here
+                    print('Item $index tapped');
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.grey[200],
+                      borderRadius: BorderRadius.circular(20.0),
+                      image: DecorationImage(
+                        opacity: 0.5,
+                        image: AssetImage(gridItems[index].imagePath),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    child: Column(
+                      children: <Widget>[
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Container(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 2),
+                              decoration: BoxDecoration(
+                                color: _getStatusColor(gridItems[index].title),
+                                borderRadius: BorderRadius.only(
+                                  bottomLeft: Radius.circular(12),
                                 ),
-                              ],
+                              ),
+                              child: Text(
+                                gridItems[index].title,
+                                style: kStatusStyle,
+                              ),
                             ),
                           ],
                         ),
-                      ),
+                      ],
                     ),
-                    staggeredTileBuilder: (int index) =>
-                        StaggeredTile.count(1, index.isEven ? 1.1 : 1.3),
-                    mainAxisSpacing: 20.0,
-                    crossAxisSpacing: 20.0,
-                  );
-                }
-              }),
+                  ),
+                ),
+                staggeredTileBuilder: (int index) =>
+                    StaggeredTile.count(1, index.isEven ? 1.1 : 1.3),
+                mainAxisSpacing: 20.0,
+                crossAxisSpacing: 20.0,
+              ),
             ),
           ],
         ),

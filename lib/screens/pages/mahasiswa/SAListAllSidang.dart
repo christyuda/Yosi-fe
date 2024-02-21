@@ -22,10 +22,9 @@ class AllSidangScreen extends StatelessWidget {
         itemBuilder: (context, index) {
           return GestureDetector(
             onTap: () {
-              // Navigasi ke detail screen sidang
-              Get.to(DetailSidangScreen(
-                sidangName: "Nama Sidang ${index + 1}",
-              ));
+              // Get.to(DetailSidangScreen(
+              //   sidangName: "Nama Sidang ${index + 1}",
+              // ));
             },
             child: Container(
               margin: EdgeInsets.all(15),
@@ -122,9 +121,9 @@ class SidangSearchDelegate extends SearchDelegate {
           title: Text(filteredSidangList[index]),
           onTap: () {
             final selectedSidang = filteredSidangList[index];
-            Get.to(
-              DetailSidangScreen(sidangName: selectedSidang),
-            );
+            // Get.to(
+            //   DetailSidangScreen(sidangName: selectedSidang),
+            // );
           },
         );
       },

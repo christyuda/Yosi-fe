@@ -126,6 +126,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.3"
+  flutter_neumorphic:
+    dependency: "direct main"
+    description:
+      name: flutter_neumorphic
+      sha256: "02606d937a3ceaa497b8a7c25f3efa95188bf93d77ebf0bd6552e432db4c2ec6"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.2.0"
   flutter_staggered_animations:
     dependency: "direct main"
     description:
@@ -208,6 +216,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.10.0"
+  network_logger:
+    dependency: "direct main"
+    description:
+      name: network_logger
+      sha256: c6fe186d544542a003a9cca00498e8a4a7043626fad220f7bc2ab7fee283efb1
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.4"
   path:
     dependency: transitive
     description:
@@ -248,6 +264,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.2.1"
+  persistent_bottom_nav_bar:
+    dependency: "direct main"
+    description:
+      name: persistent_bottom_nav_bar
+      sha256: e2e031e3366fde01511e372a9a19d720a9b252bb456e5c8d77a30d7a4a2ddfb0
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.0.2"
   petitparser:
     dependency: transitive
     description:
