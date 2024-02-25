@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:sidang_apps/model/SASidangData.dart';
 import 'package:sidang_apps/controllers/SATokenController.dart';
 
@@ -7,16 +8,13 @@ class SidangService {
 
   Future<List<SidangData>> fetchSidangData() async {
     try {
-      // Ambil token dari TokenController
       String? token = TokenController.instance.token.value;
 
-      // Periksa apakah token tidak null dan tidak kosong
       if (token.isNotEmpty) {
-        // Tambahkan token ke dalam header permintaan
         Options options = Options(headers: {'login': token});
 
         final response = await _dio.get(
-          'http://10.0.2.2:3000/mahasiswa/sidang',
+          dotenv.env['API_SIDANG']!,
           options: options,
         );
         if (response.statusCode == 200) {

@@ -6,12 +6,12 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:sidang_apps/controllers/SANavigationController.dart';
 import 'package:sidang_apps/controllers/SATokenController.dart';
 import 'package:sidang_apps/screens/pages/SALoginScreen.dart';
+import 'package:sidang_apps/services/SAGetAlldosenService.dart';
 
 void main() async {
   await dotenv.load();
   Get.put(TokenController());
-  print('Token: ${TokenController.instance.token.value}');
-
+  Get.put(DosenService());
   runApp(MyApp());
 }
 
