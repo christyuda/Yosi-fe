@@ -12,6 +12,7 @@ class LoginController extends GetxController {
   var username = ''.obs;
   var password = ''.obs;
   var role = 'Mahasiswa'.obs;
+  var passwordVisible = false.obs;
 
   void setUsername(String value) {
     username.value = value;
@@ -23,6 +24,10 @@ class LoginController extends GetxController {
 
   void setRole(String value) {
     role.value = value;
+  }
+
+  void togglePasswordVisibility() {
+    passwordVisible.value = !passwordVisible.value;
   }
 
   Future<void> login() async {

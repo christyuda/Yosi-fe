@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sidang_apps/controllers/SAGetAlldosen.dart';
+import 'package:sidang_apps/controllers/SASidangController.dart';
 import 'package:sidang_apps/model/SAAllDosen.dart';
 
 class TambahSidangScreen extends StatelessWidget {
@@ -9,6 +10,7 @@ class TambahSidangScreen extends StatelessWidget {
   final TextEditingController tahunAkademikController = TextEditingController();
   final TextEditingController jenisSidangController = TextEditingController();
   final TextEditingController revisiTextController = TextEditingController();
+  final List<String> revisiTextList = [];
   final TextEditingController pembimbingController = TextEditingController();
   final TextEditingController pengujiController = TextEditingController();
   final DosenController dosenController = Get.put(DosenController());
@@ -36,33 +38,116 @@ class TambahSidangScreen extends StatelessWidget {
             SizedBox(height: 16),
             TextFormField(
               controller: urlProposalController,
-              decoration: InputDecoration(labelText: 'URL Proposal'),
+              decoration: InputDecoration(
+                labelText: 'URL Proposal',
+                hintText: 'Masukkan URL Proposal',
+                hintStyle: TextStyle(color: Colors.grey), // Warna teks hint
+                labelStyle: TextStyle(color: Colors.blue), // Warna teks label
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                      color: Colors.blue), // Warna garis border saat fokus
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                      color: Colors.grey), // Warna garis border saat aktif
+                ),
+                errorBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                      color: Colors.red), // Warna garis border saat error
+                ),
+              ),
             ),
             SizedBox(height: 16),
             TextFormField(
               controller: judulController,
-              decoration: InputDecoration(labelText: 'Judul'),
+              decoration: InputDecoration(
+                labelText: 'Judul',
+                hintText: 'Masukkan Judul',
+                hintStyle: TextStyle(color: Colors.grey),
+                labelStyle: TextStyle(color: Colors.blue),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.blue),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.grey),
+                ),
+                errorBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.red),
+                ),
+              ),
             ),
             SizedBox(height: 16),
             TextFormField(
               controller: tahunAkademikController,
-              decoration: InputDecoration(labelText: 'Tahun Akademik'),
+              decoration: InputDecoration(
+                labelText: 'Tahun Akademik',
+                hintText: 'Masukkan Tahun Akademik',
+                hintStyle: TextStyle(color: Colors.grey),
+                labelStyle: TextStyle(color: Colors.blue),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.blue),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.grey),
+                ),
+                errorBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.red),
+                ),
+              ),
             ),
             SizedBox(height: 16),
             TextFormField(
               controller: jenisSidangController,
-              decoration: InputDecoration(labelText: 'Jenis Sidang'),
-            ),
-            SizedBox(height: 16),
-            TextFormField(
-              controller: revisiTextController,
-              decoration:
-                  InputDecoration(labelText: 'Catatan Revisi (jika ada)'),
+              decoration: InputDecoration(
+                labelText: 'Jenis Sidang',
+                hintText: 'Masukkan Jenis Sidang',
+                hintStyle: TextStyle(color: Colors.grey),
+                labelStyle: TextStyle(color: Colors.blue),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.blue),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.grey),
+                ),
+                errorBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.red),
+                ),
+              ),
             ),
             SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () {
-                // Implement logic to save the data here
+              onPressed: () async {
+                final sidangController = Get.find<SidangController>();
+                String urlProposal = urlProposalController.text;
+                String judul = judulController.text;
+                String tahunAkademik = tahunAkademikController.text;
+                String jenisSidang = jenisSidangController.text;
+                String pembimbing = pembimbingController.text;
+                String penguji = pengujiController.text;
+
+                try {
+                  await sidangController.postSidangData(
+                    urlProposal: urlProposal,
+                    judul: judul,
+                    tahunAkademik: tahunAkademik,
+                    jenisSidang: jenisSidang,
+                    pembimbing: pembimbing,
+                    penguji: penguji,
+                  );
+                } catch (error) {
+                  String errorMessage = error.toString();
+                  if (errorMessage.contains("Kuota penguji telah penuh")) {
+                    Get.snackbar('Error', 'Kuota penguji telah penuh',
+                        backgroundColor: Colors.red,
+                        colorText: Colors.white,
+                        duration: Duration(seconds: 5));
+                  } else {
+                    Get.snackbar('Error', errorMessage,
+                        backgroundColor: Colors.red,
+                        colorText: Colors.white,
+                        duration: Duration(seconds: 5));
+                  }
+                }
               },
               child: Text('Simpan'),
             ),
@@ -81,6 +166,17 @@ class TambahSidangScreen extends StatelessWidget {
       decoration: InputDecoration(
         labelText: hintText,
         border: OutlineInputBorder(),
+        hintStyle: TextStyle(color: Colors.grey),
+        labelStyle: TextStyle(color: Colors.blue),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.blue),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.grey),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.red),
+        ),
       ),
       onTap: () {
         _showAutocomplete(Get.context!, hintText, controller);
@@ -151,8 +247,7 @@ class TambahSidangScreen extends StatelessWidget {
                               title:
                                   Text('${dosen.nidn} - ${dosen.namaLengkap}'),
                               onTap: () {
-                                controller.text =
-                                    '${dosen.nidn} - ${dosen.namaLengkap}';
+                                controller.text = '${dosen.nidn}';
                                 Navigator.pop(context);
                               },
                             ),

@@ -10,10 +10,13 @@ class LoginScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Login'),
+        backgroundColor: Colors.blue, // Ganti warna app bar
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(20),
+      body: SingleChildScrollView(
+        // Tambahkan SingleChildScrollView agar tampilan dapat di-scroll jika diperlukan
+        padding: EdgeInsets.all(20),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             // Image.asset(
@@ -22,7 +25,7 @@ class LoginScreen extends StatelessWidget {
             //   height: 150,
             //   fit: BoxFit.contain,
             // ),
-            SizedBox(height: 20),
+            SizedBox(height: 40),
             TextField(
               onChanged: (value) => _loginController.setUsername(value),
               decoration: InputDecoration(
@@ -64,6 +67,7 @@ class LoginScreen extends StatelessWidget {
               },
               style: ElevatedButton.styleFrom(
                 padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+                primary: Colors.blue, // Ganti warna tombol
               ),
               child: Text(
                 'Login',

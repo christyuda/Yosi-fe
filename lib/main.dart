@@ -6,6 +6,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:sidang_apps/controllers/SANavigationController.dart';
 import 'package:sidang_apps/controllers/SATokenController.dart';
 import 'package:sidang_apps/screens/pages/SALoginScreen.dart';
+import 'package:sidang_apps/screens/pages/mahasiswa/testdetail.dart';
 import 'package:sidang_apps/services/SAGetAlldosenService.dart';
 
 void main() async {

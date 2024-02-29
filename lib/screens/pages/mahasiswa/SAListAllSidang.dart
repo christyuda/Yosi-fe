@@ -5,6 +5,7 @@ import 'package:sidang_apps/controllers/SASidangController.dart';
 import 'package:sidang_apps/model/SASidangData.dart';
 import 'package:sidang_apps/screens/components/ConvertSidang.dart';
 import 'package:sidang_apps/screens/pages/mahasiswa/SADetailSidangScreen.dart';
+import 'package:sidang_apps/screens/pages/mahasiswa/SAMahasiswaScreen.dart';
 import 'package:sidang_apps/screens/pages/mahasiswa/SATambahSidangScreen.dart';
 
 class AllSidangScreen extends StatelessWidget {
@@ -31,6 +32,12 @@ class AllSidangScreen extends StatelessWidget {
               },
             ),
           ],
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () {
+              Get.off(MahasiswaScreen());
+            },
+          ),
         ),
         body: Obx(
           () {
@@ -44,6 +51,7 @@ class AllSidangScreen extends StatelessWidget {
                 itemBuilder: (context, index) {
                   final sidangData = sidangController.sidangDataList[index];
                   String jenisSidang = '';
+                  String tglSidangNull = ' ';
 
                   if (sidangData != null) {
                     jenisSidang = sidangData.jenisSidang;
@@ -62,6 +70,7 @@ class AllSidangScreen extends StatelessWidget {
                       jenisSidang = 'Tugas Akhir';
                     }
                   }
+
                   return GestureDetector(
                     onTap: () {
                       Get.to(() => DetailSidangScreen(), arguments: sidangData);
@@ -92,8 +101,8 @@ class AllSidangScreen extends StatelessWidget {
                             ),
                           ),
                           SizedBox(height: 5),
-                          Text("Tanggal Sidang: ${sidangData.tglSidang}" ??
-                              "Belum Ditentukan"),
+                          Text(
+                              "Tanggal Sidang: ${sidangData.tglSidang != null ? sidangData.tglSidang : 'Belum Ditentukan'}"),
                           SizedBox(height: 5),
                           Text("Status: ${sidangData.status}"),
                         ],
